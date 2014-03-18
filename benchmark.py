@@ -1,5 +1,4 @@
 import networkx as nx
-import matplotlib.pyplot as plt
 import re
 import glob
 import time
@@ -51,8 +50,6 @@ with open('./output.csv', 'w') as output:
 
 			average_time = sum(times) / len(times)
 			average_time_ic = sum(times_ic) / len(times_ic)
-
-			# result_ic = nx.coloring(G, strategy=strategy, interchange=True, returntype='sets')
 
 			info = information[key]
 			if info[3] == '?':
