@@ -48,7 +48,7 @@ with open(args.output + '/output.csv', 'w') as output:
 		print key
 		G = getGraphFromFile(filename)
 
-		strategies = ['lf', 'sf', 'sl', 'gis', 'cs-bfs', 'cs-dfs']
+		strategies = ['lf', 'rs', 'sf', 'sl', 'gis', 'cs-bfs', 'cs-dfs', 'slf']
 
 		for strategy in strategies:
 			times = []
