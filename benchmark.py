@@ -11,6 +11,10 @@ parser.add_argument('--output', default=".", required=False, help="choose which 
 
 args = parser.parse_args()
 
+# nanoseconds: 1000000000
+# microseconds: 1000000
+# milliseconds: 1000
+
 current_milli_time = lambda: int(round(time.time() * 1000))
 
 def getGraphFromFile(filename):
