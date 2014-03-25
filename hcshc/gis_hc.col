@@ -1,0 +1,8 @@
+c FILE: gis_hc.col
+c Hard to color instance for Greedy Independent Set ordering (GIS).
+p edge 6 5
+e 1 5
+e 2 5
+e 3 6
+e 4 6
+e 5 6

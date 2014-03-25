@@ -1,0 +1,12 @@
+c FILE: slf_shc.col
+c Slightly hard to color instance for Saturation Largest First (SLF) or DSATUR.
+p edge 7 9
+e 1 2
+e 1 5
+e 1 6
+e 2 3
+e 2 7
+e 3 4
+e 4 5
+e 4 6
+e 5 6
