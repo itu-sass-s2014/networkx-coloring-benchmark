@@ -23,7 +23,12 @@ def benchmark(output, graph, graphname, strategy, interchange):
 	times = []
 	opt = sys.maxint
 	
-	for i in range(0, 5):
+	iteration = 5
+	
+	if strategy == 5:
+		iteration = graph.number_of_nodes()
+	
+	for i in range(0, iteration):
 		start_time = current_milli_time()
 		opt = min(opt, len(nx.coloring(graph, strategy=strategy, interchange=interchange, returntype='sets')))
 		times.append(current_milli_time() - start_time)
@@ -68,3 +73,6 @@ with open(args.output + '/output.csv', 'w') as output:
 	helper(output, nx.random_regular_graph(5, 50, 515871), "random_regular_graph_5")
 	helper(output, nx.random_regular_graph(8, 50, 243579), "random_regular_graph_8")
 	helper(output, nx.random_regular_graph(13, 50, 568324), "random_regular_graph_13")
+	
+	
+	helper(output, nx.diamond_graph(), "diamond_graph")
