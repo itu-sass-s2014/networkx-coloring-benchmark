@@ -21,14 +21,14 @@ current_milli_time = lambda: int(round(time.time() * 1000))
 
 def benchmark(output, graph, graphname, strategy, interchange):
 	times = []
+	opt = sys.maxint
 	
 	for i in range(0, 5):
 		start_time = current_milli_time()
-		result = nx.coloring(graph, strategy=strategy, interchange=interchange, returntype='sets')
+		opt = min(opt, len(nx.coloring(graph, strategy=strategy, interchange=interchange, returntype='sets')))
 		times.append(current_milli_time() - start_time)
 		
 	avg = sum(times) / len(times)
-	opt = len(result)
 	
 	print graphname, strategy, interchange
 	output.write(str.format("{0},{1},{2},{3},{4},{5},{6}\n", graphname, graph.number_of_nodes(), graph.number_of_edges(), strategy, interchange, opt, avg))
