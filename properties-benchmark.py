@@ -35,8 +35,11 @@ def benchmark(output, graph, graphname, strategy, interchange):
 	
 def helper(output, graph, graphname):
 	for strategy in strategies:
-		benchmark(output, graph, graphname, strategy, False)
-		benchmark(output, graph, graphname, strategy, True)
+		try:
+			benchmark(output, graph, graphname, strategy, False)	
+			benchmark(output, graph, graphname, strategy, True)
+		except nx.exception.NetworkXPointlessConcept:
+			print ""
 
 if not os.path.exists(args.output):
     os.makedirs(args.output)
