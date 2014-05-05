@@ -11,7 +11,7 @@ parser.add_argument('--output', default="./properties", required=False, help="ch
 
 args = parser.parse_args()
 
-strategies = ['lf', 'rs', 'sf', 'sl', 'gis', 'cs-bfs', 'cs-dfs', 'slf']
+strategies = ['lf', 'rs', 'sl', 'gis', 'cs-bfs', 'cs-dfs', 'slf']
 
 # nanoseconds: 1000000000
 # microseconds: 1000000
