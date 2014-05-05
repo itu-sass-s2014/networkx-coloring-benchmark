@@ -25,7 +25,7 @@ def benchmark(output, graph, graphname, strategy, interchange):
 	
 	iteration = 5
 	
-	if strategy == 5:
+	if strategy == "rs":
 		iteration = graph.number_of_nodes()
 	
 	for i in range(0, iteration):
