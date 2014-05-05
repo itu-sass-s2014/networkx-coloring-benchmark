@@ -1,4 +1,5 @@
 import networkx as nx
+import os
 import sys
 import re
 import glob
@@ -8,6 +9,7 @@ import argparse
 parser = argparse.ArgumentParser(description='Run benchmark on networkx graph coloring algorithms')
 parser.add_argument('--folder', default=".", required=True, help="choose which folder to point to with .col files")
 parser.add_argument('--output', default=".", required=False, help="choose which folder to output .csv file to")
+parser.add_argument('--iterations', default="5", required=False, help="choose number of iterations for each strategy")
 
 args = parser.parse_args()
 
@@ -16,6 +18,9 @@ args = parser.parse_args()
 # milliseconds: 1000
 
 current_milli_time = lambda: int(round(time.time() * 1000))
+
+if not os.path.exists(args.output):
+	os.makedirs(args.output)
 
 def getGraphFromFile(filename):
 	G = nx.Graph()
@@ -55,24 +60,27 @@ with open(args.output + '/output.csv', 'w') as output:
 			times_ic = []
 
 			print key, strategy
+			
+			result_optimal = sys.maxint
+			result_optimal_ic = sys.maxint
 
-			for i in range(0, 5):
+			for i in range(0, int(args.iterations)):
 				start_time = current_milli_time()
-				result = nx.coloring(G, strategy=strategy, interchange=False, returntype='sets')
+				result_optimal = min(result_optimal, len(nx.coloring(G, strategy=strategy, interchange=False, returntype='sets')))
 				times.append(current_milli_time() - start_time)
 
 			print key, strategy, "interchange"
 
-			for i in range(0, 5):
+			for i in range(0, int(args.iterations)):
 				start_time = current_milli_time()
-				result_ic = nx.coloring(G, strategy=strategy, interchange=True, returntype='sets')
+				result_optimal_ic = min(result_optimal_ic, len(nx.coloring(G, strategy=strategy, interchange=True, returntype='sets')))
 				times_ic.append(current_milli_time() - start_time)
 
 			average_time = sum(times) / len(times)
 			average_time_ic = sum(times_ic) / len(times_ic)
 
-			result_optimal = len(result)
-			result_optimal_ic = len(result_ic)
+			# result_optimal = len(result)
+			# result_optimal_ic = len(result_ic)
 			result_nodes = G.number_of_nodes()
 			result_edges = G.number_of_edges()
 
